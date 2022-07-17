@@ -16,6 +16,7 @@ export interface MdxNode
   id: string;
   slug: string;
   fileAbsolutePath: string;
+  excerpt: string;
 }
 
 export interface FrontMatter
@@ -24,4 +25,5 @@ export interface FrontMatter
   date: string;
   hero_image: ImageDataLike;
   hero_image_alt: string;
+  series: string;
 }

@@ -7,17 +7,17 @@ export interface Node<T>
   children: Node<T>[];
 }
 
-interface PostPageNode<T> extends Node<T>
+interface PostPageItemNode<T> extends Node<T>
 {
-  parent: PostPageNode<T> | null;
-  children: PostPageNode<T>[];
+  parent: PostPageItemNode<T> | null;
+  children: PostPageItemNode<T>[];
   mdx: MdxNode | null;
   fullPath: string;
 }
 
-export function toPostPageNode(postPageList: string[], mdxList: MdxNode[])
+export function toPostPageItemNode(postPageList: string[], mdxList: MdxNode[], postString = "post")
 {
-  const rootNode: PostPageNode<string> = {
+  const rootNode: PostPageItemNode<string> = {
     value: "",
     parent: null,
     children: [],
@@ -25,7 +25,9 @@ export function toPostPageNode(postPageList: string[], mdxList: MdxNode[])
     mdx: null
   };
 
-  for (const p of postPageList)
+  const postOnlyPageList = postPageList.filter(p => p.includes(postString));
+
+  for (const p of postOnlyPageList)
   {
     const itemList = p.split("/");
     let currentRootNode = rootNode;
@@ -53,4 +55,4 @@ export function toPostPageNode(postPageList: string[], mdxList: MdxNode[])
   return rootNode;
 }
 
-export default PostPageNode;
+export default PostPageItemNode;

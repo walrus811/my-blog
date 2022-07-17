@@ -1,10 +1,10 @@
-import { graphql, Link } from "gatsby";
-import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
+import { graphql } from "gatsby";
 import * as React from "react";
 import Layout, { SelectViewMode } from "../components/Layout";
+import PostSummary from "../components/PostSummary";
 import useTailwindCssDarkMode from "../hooks/useTailwindCssDarkMode";
 import { AllMdx, AllSitePage } from "../models/graphql/types";
-import PostPageNode, { toPostPageNode } from "../models/PostPageNode";
+import { toPostPageItemList } from "../models/PostPageItem";
 
 interface IndexPageProps {
   data: {
@@ -15,19 +15,18 @@ interface IndexPageProps {
 
 const IndexPage = ({ data }: IndexPageProps) => {
   const darkModeState = useTailwindCssDarkMode();
-  const rootNode = toPostPageNode(data.allSitePage.distinct, data.allMdx.nodes);
-  const postNode = rootNode.children[0];
-
-  function renderPostPageNode(rootNode: PostPageNode<string>, headerLevel = 1) {
-    if (!rootNode) return null;
-    return <div className=""></div>;
-  }
+  const postPageItemList = toPostPageItemList(
+    data.allSitePage.distinct,
+    data.allMdx.nodes
+  );
 
   return (
     <Layout darkModeState={darkModeState} viewMode={SelectViewMode.Category}>
-      <section className="flex gap-4">
-        {postNode.children.length > 0 ? (
-          postNode.children.map((n) => renderPostPageNode(n, 2))
+      <section className="flex flex-wrap gap-4 justify-center">
+        {postPageItemList.length > 0 ? (
+          postPageItemList.map((item) => (
+            <PostSummary key={item.mdx.id} postPageItem={item}></PostSummary>
+          ))
         ) : (
           <p>포스트가 없습니다.</p>
         )}
@@ -63,6 +62,7 @@ export const query = graphql`
         id
         slug
         fileAbsolutePath
+        excerpt(truncate: true, pruneLength: 120)
       }
     }
   }
