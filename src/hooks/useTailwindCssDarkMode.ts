@@ -7,6 +7,14 @@ function useTailwindCssDarkMode()
 
   useEffect(function initializePage()
   {
+    document
+      .getElementsByTagName("body")[0]
+      .classList.add(
+        "bg-zinc-50",
+        "dark:bg-zinc-900",
+        "text-black",
+        "dark:text-white"
+      );
     const savedDarkMoode = localStorage.getItem("darkMode") === "true" ? true : false;
     setDarkMode(savedDarkMoode);
   }, []);
