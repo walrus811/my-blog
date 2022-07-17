@@ -7,7 +7,6 @@ import {
   LightModeImage,
   NumberedListImage,
 } from "./Images";
-import * as styles from "./Layout.module.css";
 
 deckDeckGoHighlightElement();
 
@@ -44,9 +43,9 @@ const Layout = ({
 
   return (
     <div
-      className={`${darkMode ? "dark" : ""} ${
-        styles.rootDiv
-      } flex flex-col items-center gap-8 bg-zinc-50 dark:bg-zinc-900 text-black dark:text-white overflow-auto`}
+      className={`${
+        darkMode ? "dark" : ""
+      }  flex flex-col items-center gap-8 bg-zinc-50 dark:bg-zinc-900 text-black dark:text-white overflow-auto`}
     >
       <header className="sticky top-0 z-50 select-none w-full flex items-center justify-between p-2 text-lg bg-zinc-100 dark:bg-zinc-800 text-black dark:text-white border-b-2 border-zinc-100 dark:border-zinc-800 shadow-md shadow-zinc-300/50 dark:shadow-zinc-700/50">
         <Link className="cursor-pointer text-xl font-bold" to="/">
