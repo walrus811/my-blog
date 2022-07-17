@@ -4,6 +4,8 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Layout, { SelectViewMode } from "../../components/Layout";
 import useTailwindCssDarkMode from "../../hooks/useTailwindCssDarkMode";
+import { MDXProvider } from "@mdx-js/react";
+import { MdxH1 } from "../../components/MdxProviderComponents";
 
 const Post = ({ data }) => {
   const image = getImage(data.mdx.frontmatter.hero_image);
@@ -13,7 +15,9 @@ const Post = ({ data }) => {
       <h1>{data.mdx.frontmatter.title}</h1>
       <p>Posted: {data.mdx.frontmatter.date}</p>
       <GatsbyImage image={image} alt={data.mdx.frontmatter.hero_image_alt} />
-      <MDXRenderer>{data.mdx.body}</MDXRenderer>
+      <MDXProvider components={{ h1: MdxH1 }}>
+        <MDXRenderer>{data.mdx.body}</MDXRenderer>
+      </MDXProvider>
     </Layout>
   );
 };
