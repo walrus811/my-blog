@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
-function useTailwindCssDarkMode()
+
+/**
+ * @param bodyClassList class list for body element, in IOS Safari body element's classes not work well so it needs to be injected at runtime
+ */
+function useTailwindCssDarkMode(bodyClassList: string[])
 {
   const darkModeState = useState(false);
   const [darkMode, setDarkMode] = darkModeState;
@@ -10,10 +14,7 @@ function useTailwindCssDarkMode()
     document
       .getElementsByTagName("body")[0]
       .classList.add(
-        "bg-zinc-50",
-        "dark:bg-zinc-900",
-        "text-black",
-        "dark:text-white"
+        ...bodyClassList
       );
     const savedDarkMoode = localStorage.getItem("darkMode") === "true" ? true : false;
     setDarkMode(savedDarkMoode);

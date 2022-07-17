@@ -1,7 +1,8 @@
 import { graphql } from "gatsby";
 import * as React from "react";
-import Layout, { SelectViewMode } from "../components/Layout";
+import Layout from "../components/Layout";
 import PostSummary from "../components/PostSummary";
+import { BODY_BACKGROUND_CLASSES } from "../constants";
 import useTailwindCssDarkMode from "../hooks/useTailwindCssDarkMode";
 import { AllMdx, AllSitePage } from "../models/graphql/types";
 import { toPostPageItemList } from "../models/PostPageItem";
@@ -14,15 +15,17 @@ interface IndexPageProps {
 }
 
 const IndexPage = ({ data }: IndexPageProps) => {
-  const darkModeState = useTailwindCssDarkMode();
+  const darkModeState = useTailwindCssDarkMode(BODY_BACKGROUND_CLASSES);
+
   const postPageItemList = toPostPageItemList(
     data.allSitePage.distinct,
     data.allMdx.nodes
   );
 
   return (
-    <Layout darkModeState={darkModeState} viewMode={SelectViewMode.Category}>
-      <section className="flex flex-wrap gap-4 justify-center">
+    <Layout darkModeState={darkModeState}>
+      <section className="flex justify-center ml-16 mr-16"></section>
+      <section className="flex flex-wrap gap-4 justify-center ml-16 mr-16">
         {postPageItemList.length > 0 ? (
           postPageItemList.map((item) => (
             <PostSummary key={item.mdx.id} postPageItem={item}></PostSummary>
