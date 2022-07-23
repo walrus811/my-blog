@@ -19,6 +19,12 @@ export interface MdxNode
   excerpt: string;
 }
 
+export interface Mdx
+{
+  frontmatter: FrontMatter;
+  body: string;
+}
+
 export interface FrontMatter
 {
   title: string;
@@ -26,4 +32,24 @@ export interface FrontMatter
   hero_image: ImageDataLike;
   hero_image_alt: string;
   series: string;
+}
+
+export interface Site
+{
+  siteMetadata: SiteMetaData;
+}
+
+export interface SiteMetaData
+{
+  title: string;
+  description: string;
+  profile: Profile;
+}
+
+export interface Profile
+{
+  name: string;
+  description: string;
+  githubUrl: string;
+  email: string;
 }
