@@ -34,7 +34,7 @@ const Layout = ({ pageTitle, children, darkModeState }: LayoutProps) => {
     <div
       className={`${
         darkMode ? "dark" : ""
-      }  flex flex-col items-center gap-8 bg-zinc-50 dark:bg-zinc-900 text-black dark:text-white overflow-auto`}
+      }  flex flex-col items-center gap-8 bg-zinc-50 dark:bg-zinc-900 text-black dark:text-white`}
     >
       <header className="sticky top-0 z-50 select-none w-full flex items-center justify-between p-2 text-lg bg-zinc-100 dark:bg-zinc-800 text-black dark:text-white border-b-2 border-zinc-100 dark:border-zinc-800 shadow-md shadow-zinc-300/50 dark:shadow-zinc-700/50">
         <Link className="cursor-pointer flex items-center gap-1 group" to="/">
